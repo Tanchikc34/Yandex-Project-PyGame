@@ -44,22 +44,22 @@ class ImageButton:
             pygame.event.post(pygame.event.Event(pygame.USEREVENT, button=self))
 
 
-def import_csv_layout(path):
-    terrain_map = []
+def csv_im(path):
+    map = []
     with open(path) as level_map:
         layout = reader(level_map, delimiter=',')
         for row in layout:
-            terrain_map.append(list(row))
-        return terrain_map
+            map.append(list(row))
+        return map
 
 
-def import_folder(path):
-    surface_list = []
+def folder(path):
+    surface = []
 
     for _, __, img_files in walk(path):
         for image in img_files:
             full_path = path + '/' + image
             image_surf = pygame.image.load(full_path).convert_alpha()
-            surface_list.append(image_surf)
+            surface.append(image_surf)
 
-    return surface_list
+    return surface

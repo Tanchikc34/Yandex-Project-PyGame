@@ -6,7 +6,7 @@ from story import Story
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos, groups, obstacle_sprites, id):
         super().__init__(groups)
-        self.image = pygame.image.load('user.png').convert_alpha()
+        self.image = pygame.image.load('data/user.png').convert_alpha()
         self.rect = self.image.get_rect(topleft=pos)
         self.direction = pygame.math.Vector2()
         self.speed = 3
@@ -25,23 +25,23 @@ class Player(pygame.sprite.Sprite):
 
         if keys[pygame.K_w]:
             self.direction.y = -1
-            self.image = pygame.image.load('user2.png').convert_alpha()
+            self.image = pygame.image.load('data/user2.png').convert_alpha()
         elif keys[pygame.K_s]:
             self.direction.y = 1
-            self.image = pygame.image.load('user3.png').convert_alpha()
+            self.image = pygame.image.load('data/user3.png').convert_alpha()
         else:
             self.direction.y = 0
-            self.image = pygame.image.load('user.png').convert_alpha()
+            self.image = pygame.image.load('data/user.png').convert_alpha()
 
         if keys[pygame.K_d]:
             self.direction.x = 1
-            self.image = pygame.image.load('user2.png').convert_alpha()
+            self.image = pygame.image.load('data/user2.png').convert_alpha()
         elif keys[pygame.K_a]:
             self.direction.x = -1
-            self.image = pygame.image.load('user3.png').convert_alpha()
+            self.image = pygame.image.load('data/user3.png').convert_alpha()
         else:
             self.direction.x = 0
-            self.image = pygame.image.load('user.png').convert_alpha()
+            self.image = pygame.image.load('data/user.png').convert_alpha()
 
         if keys[pygame.K_e]:
             story = Story(0, self.id)

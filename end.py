@@ -10,9 +10,9 @@ class End:
         self.screen = pygame.display.set_mode((WIDTH, HEIGTH))
         pygame.display.set_caption("Конец!")
         self.clock = pygame.time.Clock()
-        pygame.display.set_icon(pygame.image.load("icon.ico"))
-        self.background_image = pygame.image.load('background_end.png')
-        self.button_exit = ImageButton(510, 560, 407, 140, "button_exit.png", "button_exit_f.png")
+        pygame.display.set_icon(pygame.image.load("data/icon.ico"))
+        self.background_image = pygame.image.load('data/background_end.png')
+        self.button_exit = ImageButton(510, 560, 407, 140, "data/button_exit.png", "data/button_exit_f.png")
         self.font = pygame.font.Font(None, 34)
         intro_text = f"Уровень вашей репутации: {self.reputation}"
         self.text_1 = self.font.render(intro_text, False, (0, 0, 0))
@@ -30,6 +30,10 @@ class End:
         intro_text = f"Концовка: {self.end}"
         self.text_3 = self.font.render(intro_text, False, (0, 0, 0))
         self.text_4 = self.font.render(self.end_t, False, (0, 0, 0))
+        # Музыка
+        pygame.mixer.init()
+        pygame.mixer.music.load("data/muz.mp3")
+        pygame.mixer.music.play(-1)
 
     def run(self):
         while True:

@@ -13,8 +13,8 @@ class Story:
         self.screen = pygame.display.set_mode((WIDTH, HEIGTH))
         pygame.display.set_caption("Duck Trip")
         self.clock = pygame.time.Clock()
-        pygame.display.set_icon(pygame.image.load("icon.ico"))
-        self.background_image = pygame.image.load('background_story.png')
+        pygame.display.set_icon(pygame.image.load("data/icon.ico"))
+        self.background_image = pygame.image.load('data/background_story.png')
         self.text_2 = None
         self.text_1 = None
         self.text_surface = None
@@ -32,8 +32,14 @@ class Story:
         self.reputation = result[1]
         # Создание карточек и текста к ним
         self.font = pygame.font.Font(None, 34)
-        self.button_1 = ImageButton(253, 222, 365, 485, "button_story.png", "button_story2.png", "click.mp3")
-        self.button_2 = ImageButton(668, 222, 365, 485, "button_story.png", "button_story2.png", "click.mp3")
+        self.button_1 = ImageButton(253, 222, 365, 485, "data/button_story.png", "data/button_story2.png",
+                                    "data/click.mp3")
+        self.button_2 = ImageButton(668, 222, 365, 485, "data/button_story.png", "data/button_story2.png",
+                                    "data/click.mp3")
+        # Музыка
+        pygame.mixer.init()
+        pygame.mixer.music.load("data/muz.mp3")
+        pygame.mixer.music.play(-1)
 
         if self.id_s == 0:
             self.story_0()
@@ -112,7 +118,7 @@ class Story:
         pygame.init()
         pygame.display.set_caption("Duck Trip")
         self.clock = pygame.time.Clock()
-        pygame.display.set_icon(pygame.image.load("icon.ico"))
+        pygame.display.set_icon(pygame.image.load("data/icon.ico"))
         running = True
         while running:
             for event in pygame.event.get():

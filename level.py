@@ -20,7 +20,7 @@ class Level:
         self.life = 5
         self.reputation = 0
         # Создание таблицы и текста характеристик персонажа
-        self.tablet = ImageButton(10, 10, 411, 103, "tablet.png")
+        self.tablet = ImageButton(10, 10, 411, 103, "data/tablet.png")
         self.font = pygame.font.Font(None, 34)
         intro_text = f"Уровень вашей репутации: {self.reputation}"
         self.text_1 = self.font.render(intro_text, False, (0, 0, 0))
@@ -29,14 +29,19 @@ class Level:
         # Подключение к БД и создание курсора
         self.connection = sqlite3.connect("bd_app")
         self.cursor = self.connection.cursor()
+        # Музыка
+        pygame.mixer.init()
+        pygame.mixer.music.load("data/muz.mp3")
+        pygame.mixer.music.play(-1)
 
+    # Метод для создания карты
     def create_map(self):
         layouts = {
-            'no': import_csv_layout('level_no.csv'),
-            'icon': import_csv_layout('level_icons.csv')
+            'no': csv_im('level_no.csv'),
+            'icon': csv_im('level_icons.csv')
         }
         graphics = {
-            'icons': import_folder('icons')
+            'icons': folder('icons')
         }
 
         for style, layout in layouts.items():
@@ -52,11 +57,13 @@ class Level:
                             TileIcon((x, y), [self.visible_sprites, self.obstacle_sprites], 'icons', surf, int(col))
         self.player = Player((900, 1015), [self.visible_sprites], self.obstacle_sprites, self.id)
 
+    # Поиск данных в бд
     def pu_info(self, i):
         result = self.cursor.execute("SELECT * FROM user WHERE id = ?", (i,)).fetchall()[0]
         self.life = result[2]
         self.reputation = result[1]
 
+    # Отображение характеристик
     def info(self):
         intro_text = f"Уровень вашей репутации: {self.reputation}"
         self.text_1 = self.font.render(intro_text, False, (0, 0, 0))
@@ -66,7 +73,7 @@ class Level:
     def run(self):
         pygame.init()
         pygame.display.set_caption("Duck Trip")
-        pygame.display.set_icon(pygame.image.load("icon.ico"))
+        pygame.display.set_icon(pygame.image.load("data/icon.ico"))
         running = True
         while running:
             for event in pygame.event.get():
@@ -93,7 +100,7 @@ class Level:
 class Camera(pygame.sprite.Group):
     def __init__(self):
         super().__init__()
-        self.background_image = pygame.image.load('background_level.png').convert()
+        self.background_image = pygame.image.load('data/background_level.png').convert()
         self.background_image_rect = self.background_image.get_rect(topleft=(0, 0))
         self.display_surface = pygame.display.get_surface()
         self.half_width = self.display_surface.get_size()[0] // 2
