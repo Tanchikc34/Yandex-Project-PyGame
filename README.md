@@ -1,1 +1,1 @@
-Презентация и пояснительная записка: https://disk.yandex.ru/d/0oebfyok1Qbesw
+Презентация, пояснительная записка и ТЗ: https://disk.yandex.ru/d/0oebfyok1Qbesw
